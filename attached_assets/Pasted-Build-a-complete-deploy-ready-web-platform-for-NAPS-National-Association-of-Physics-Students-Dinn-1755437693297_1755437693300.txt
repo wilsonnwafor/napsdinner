@@ -1,0 +1,171 @@
+Build a complete, deploy-ready web platform for NAPS (National Association of Physics Students) Dinner Night with a modern, mobile-first UI. Include public pages and a secure admin dashboard. Use Paystack Inline for payments with the keys below. No attendee accounts/logins required to buy; unlimited purchases allowed.
+
+Event/Branding
+
+Title: NAPS Dinner Night
+
+Subtitle: Courtesy of Luminous Executives
+
+Tag: Departmental Dinner Night
+
+Note: From the office of the D.O.S and Welfare Director
+
+Design: sleek, event/luxury style (deep blue, gold accents), clean typography, subtle motion.
+
+Tickets (Core Logic)
+
+Categories & Prices:
+
+Regular — ₦5,000
+
+Couples Table — ₦8,000
+
+VIP Table (six seats) — ₦50,000
+
+Sponsors — ₦100,000
+
+Ticket codes pool: integers 501–1000 (inclusive).
+
+On successful verified payment, assign unique, unused ticket code(s) to the order (one code per ticket unit).
+
+Prevent duplicates with a transactional, concurrency-safe allocation (e.g., DB row lock / unique index).
+
+If a purchase quantity exceeds remaining codes, prevent checkout and show “Sold Out / Not enough tickets left.”
+
+Order flow (no signup):
+
+Public product grid → user selects category + quantity → checkout form (Name, Email, Phone) → Paystack Inline pops up → backend verifies → allocate code(s) → generate ticket(s) → email delivery.
+
+Ticket artifact:
+
+Generate PDF (preferred) or HTML ticket per order containing: Event details, Buyer name, Category, Quantity, Ticket Code(s), Order ID, Date/Time.
+
+Include a QR code encoding {orderId, code, category} for scan/verify.
+
+Store tickets and codes in DB; mark codes as assigned.
+
+Emails (auto):
+
+Buyer email: subject “Your NAPS Dinner Night Ticket(s)” with thank-you note + attached PDF / link.
+
+Admin email: subject “New Ticket Sale” with buyer info, category, quantity, amount, codes, orderId.
+
+Verification page (optional public route): allow scanning QR to confirm validity (code not reused, status=valid).
+
+Awards Voting
+
+Awardees management: Admin can create award categories and nominees/awardees (name, photo, bio, unique slug).
+
+Public voting pages: Each awardee has a shareable unique link (/vote/{slug}) with profile and Vote button.
+
+Voting rules: One vote per email per award category (store email hash + category to prevent duplicates). Add basic anti-abuse: IP rate-limit and bot protection (simple CAPTCHA).
+
+Live counters: Optional delayed tally display (configurable: show/hide counts publicly).
+
+DB: store votes with fields {awardId, awardeeId, voterEmailHash, ip, userAgent, timestamp}.
+
+Artists Sign-Up (Gated by 5 Ticket Sales)
+
+Flow:
+
+Artist opens Register as an Artist form (Name, Email, Phone, Act Type, Social link).
+
+On submit, system creates Pending Artist with a unique referral link like /t/{artistRef}.
+
+Any ticket purchased through that link (stored as ref=artistRef) increments the artist’s referred sales count.
+
+Once referred ticket sales >= 5, auto-mark artist as Approved and send email to artist + admin.
+
+Admin can view artist referrals, status, and manually approve/deny.
+
+Registration: MR & MRS NAPS
+
+Public registration form: Name, Email, Phone, Department/Level, Short bio, Photo upload (store safely), Consent checkbox.
+
+Store entries in DB; admin can view/export and toggle shortlist status. (No payment required unless admin enables later.)
+
+Admin Dashboard (Secure)
+
+Auth: Admin-only login (JWT sessions).
+
+Overview: KPIs (Total Revenue, Total Orders, Tickets Remaining, Sales by Category, Votes total by award, Artist referrals status, MR/MRS entries).
+
+Tickets & Orders: searchable table, filters (date, category, email), drill-down to order with codes. Actions: Resend Ticket Email, refund flag, delete (soft-delete).
+
+Inventory/Code Pool: view remaining codes (501–1000), assigned/unassigned; ability to reserve/release codes (with safeguards).
+
+Awards/Voting: CRUD awards & awardees, export votes CSV, toggle public count visibility.
+
+Artists: list pending/approved, referral counts, links, manual approve/deny, export CSV.
+
+MR & MRS: list entries, view details/photos, shortlist toggle, export CSV.
+
+Settings: admin email, email transport config, Paystack mode (test/live), UI theme toggles.
+
+Logs: payment webhooks, email send results.
+
+Tech/Implementation
+
+Stack: Next.js (App Router) or React + Node/Express; TypeScript preferred; Prisma/TypeORM with PostgreSQL or MySQL.
+
+Payments: Paystack Inline (JS SDK) on client; server-side verification via Paystack API before issuing tickets.
+
+Use these TEST KEYS now:
+
+PAYSTACK_PUBLIC_KEY=pk_test_5f106f09f003949eac65b776d65616311f88e118
+
+PAYSTACK_SECRET_KEY=sk_test_b64dd2fe42bab3d84ae9d14acaf6ce5ca6ae6ff2
+
+Envs & Config:
+
+ADMIN_EMAIL=you@example.com (use a placeholder)
+
+JWT_SECRET (read from env)
+
+DATABASE_URL
+
+MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASS, MAIL_FROM (use Nodemailer SMTP; include example using e.g. Mailtrap or Gmail OAuth2)
+
+APP_BASE_URL for links in emails/QR
+
+Security:
+
+Validate/escape inputs; server-side rate limiting on voting; unique DB constraints for ticket codes and one-vote-per-email-per-category.
+
+Webhook signature verification for Paystack events.
+
+Concurrency Safety:
+
+On payment verify, allocate codes inside a single DB transaction with a unique index on ticketCode.
+
+If quantity N, atomically pop N codes from the unassigned pool; fail gracefully if insufficient.
+
+Artifacts:
+
+PDF generation with QR (e.g., pdfkit/puppeteer + qrcode).
+
+Email HTML templates (buyer ticket, admin notification, artist approved).
+
+Modern UI:
+
+Tailwind CSS; accessible components; responsive grid; subtle framer-motion transitions; clean empty states; toasts for actions.
+
+Public pages: Home (hero + tickets), Awards/Vote, Artists, MR&MRS, Verify Ticket, Contact.
+
+Admin: sidebar layout, tables with filters, charts (sales by category, votes per awardee).
+
+Acceptance Criteria
+
+Buying any ticket with the test keys results in: verified payment → unique code(s) from 501–1000 → PDF ticket emailed to buyer → admin notified → DB updated.
+
+Trying to exceed remaining codes blocks checkout with clear message.
+
+Voting works with share links and enforces one vote per email per award category.
+
+Artist becomes Approved automatically at 5 referred ticket sales.
+
+MR & MRS registrations stored and visible in admin.
+
+Admin dashboard shows live stats, exports CSVs, and can resend ticket emails.
+
+All routes build and run with npm run build && npm start, and environment variables are documented.
