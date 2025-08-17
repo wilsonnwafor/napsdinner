@@ -52,11 +52,23 @@ export class PaystackService {
       throw new Error('Paystack not loaded');
     }
 
-    const handler = window.PaystackPop.setup({
-      ...config,
-      currency: config.currency || 'NGN'
-    });
+    // Ensure callback and onClose are properly bound functions
+    const paystackConfig = {
+      key: config.key,
+      email: config.email,
+      amount: config.amount,
+      currency: config.currency || 'NGN',
+      reference: config.reference,
+      metadata: config.metadata,
+      callback: config.callback || function(response: any) { 
+        console.log('Payment completed:', response); 
+      },
+      onClose: config.onClose || function() { 
+        console.log('Payment popup closed'); 
+      }
+    };
 
+    const handler = window.PaystackPop.setup(paystackConfig);
     handler.openIframe();
   }
 }

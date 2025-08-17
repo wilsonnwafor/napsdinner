@@ -107,30 +107,33 @@ export default function Checkout() {
             quantity: item.quantity,
           }))
         },
-        callback: async (response) => {
-          try {
-            // Verify payment
-            await verifyPaymentMutation.mutateAsync(response.reference);
-            
-            // Clear cart and artist ref
-            clearCart();
-            sessionStorage.removeItem('artistRef');
-            
-            toast({
-              title: "Payment Successful!",
-              description: "Your tickets have been sent to your email.",
+        callback: function(response: any) {
+          // Use non-async callback for Paystack compatibility
+          verifyPaymentMutation.mutateAsync(response.reference)
+            .then(() => {
+              clearCart();
+              sessionStorage.removeItem('artistRef');
+              
+              toast({
+                title: "Payment Successful!",
+                description: "Your tickets have been sent to your email.",
+              });
+              
+              setLocation("/");
+            })
+            .catch((error) => {
+              console.error('Payment verification error:', error);
+              toast({
+                title: "Payment Verification Failed",
+                description: "Please contact support if you were charged.",
+                variant: "destructive",
+              });
+            })
+            .finally(() => {
+              setIsProcessing(false);
             });
-            
-            setLocation("/");
-          } catch (error) {
-            toast({
-              title: "Payment Verification Failed",
-              description: "Please contact support if you were charged.",
-              variant: "destructive",
-            });
-          }
         },
-        onClose: () => {
+        onClose: function() {
           setIsProcessing(false);
         },
       });
