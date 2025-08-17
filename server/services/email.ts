@@ -11,9 +11,17 @@ export class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
+    console.log('Email service initializing with:', {
+      host: MAIL_HOST,
+      port: MAIL_PORT,
+      user: MAIL_USER,
+      passConfigured: !!MAIL_PASS
+    });
+
     this.transporter = nodemailer.createTransport({
       host: MAIL_HOST,
       port: MAIL_PORT,
+      secure: MAIL_PORT === 465, // true for 465, false for other ports
       auth: {
         user: MAIL_USER,
         pass: MAIL_PASS,
@@ -93,7 +101,33 @@ export class EmailService {
       }];
     }
 
-    return await this.transporter.sendMail(mailOptions);
+    try {
+      console.log('Attempting to send email to:', to);
+      console.log('Email service config:', {
+        from: MAIL_FROM,
+        host: MAIL_HOST,
+        port: MAIL_PORT,
+        userConfigured: !!MAIL_USER
+      });
+
+      const info = await this.transporter.sendMail(mailOptions);
+
+      console.log('Email sent successfully:', {
+        messageId: info.messageId,
+        to: to,
+        subject: subject
+      });
+      return info;
+    } catch (error) {
+      console.error('Failed to send email:', {
+        error: error,
+        to: to,
+        host: MAIL_HOST,
+        port: MAIL_PORT,
+        user: MAIL_USER
+      });
+      throw error;
+    }
   }
 
   async sendAdminNotification(orderData: any) {
