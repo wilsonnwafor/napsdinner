@@ -102,6 +102,10 @@ export default function Checkout() {
         metadata: {
           orderId: orderResponse.orderId,
           artistRef: artistRef || null,
+          items: items.map(item => ({
+            category: item.category,
+            quantity: item.quantity,
+          }))
         },
         callback: async (response) => {
           try {

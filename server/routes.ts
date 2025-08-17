@@ -183,7 +183,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Start transaction for ticket allocation
       const metadata = (transaction.metadata && typeof transaction.metadata === 'object') ? transaction.metadata : {};
-      const items = Array.isArray(metadata.items) ? metadata.items : [];
+      const items = Array.isArray((metadata as any).items) ? (metadata as any).items : [];
       const allocatedItems = [];
 
       for (const item of items) {
