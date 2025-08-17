@@ -182,8 +182,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Start transaction for ticket allocation
-      const metadata = transaction.metadata || {};
-      const items = metadata.items || [];
+      const metadata = (transaction.metadata && typeof transaction.metadata === 'object') ? transaction.metadata : {};
+      const items = Array.isArray(metadata.items) ? metadata.items : [];
       const allocatedItems = [];
 
       for (const item of items) {
@@ -202,7 +202,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           orderId: orderId,
           category: item.category,
           quantity: item.quantity,
-          unitPrice: (parseInt(transaction.amount) / 100 / items.reduce((sum: number, i: any) => sum + i.quantity, 0)).toString()
+          unitPrice: (parseInt(transaction.amount.toString()) / 100 / items.reduce((sum: number, i: any) => sum + i.quantity, 0)).toString()
         });
 
         allocatedItems.push({
