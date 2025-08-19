@@ -115,8 +115,14 @@ export class EmailService {
       console.log('Email sent successfully:', {
         messageId: info.messageId,
         to: to,
-        subject: subject
+        subject: subject,
+        previewUrl: info.previewUrl || 'No preview available'
       });
+      
+      // For Ethereal Email testing service, log the preview URL
+      if (info.previewUrl) {
+        console.log('📧 Email Preview URL (for testing):', info.previewUrl);
+      }
       return info;
     } catch (error) {
       console.error('Failed to send email:', {
