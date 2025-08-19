@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 
-const MAIL_HOST = process.env.MAIL_HOST || 'smtp.mailtrap.io';
-const MAIL_PORT = parseInt(process.env.MAIL_PORT || '2525');
-const MAIL_USER = process.env.MAIL_USER || 'your_username';
-const MAIL_PASS = process.env.MAIL_PASS || 'your_password';
+const MAIL_HOST = process.env.MAIL_HOST || 'smtp.ethereal.email';
+const MAIL_PORT = parseInt(process.env.MAIL_PORT || '587');
+const MAIL_USER = process.env.MAIL_USER || '';
+const MAIL_PASS = process.env.MAIL_PASS || '';
 const MAIL_FROM = process.env.MAIL_FROM || 'noreply@naps-dinner.com';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@naps-dinner.com';
 
