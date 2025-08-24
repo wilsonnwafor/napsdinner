@@ -471,13 +471,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const user = await storage.getUserByUsername(username);
+      console.log("User fectched from DB:=>",user);
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
 
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        return res.status(401).json({ message: 'Invalid password' });
       }
 
       const token = generateToken({

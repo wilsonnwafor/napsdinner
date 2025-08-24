@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAPS Dinner Night - Complete Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0F1B3C',
+                            800: '#1E3A8A',
+                            700: '#1E40AF',
+                            600: '#2563EB'
+                        },
+                        gold: {
+                            500: '#F59E0B',
+                            400: '#FBBF24',
+                            300: '#FCD34D',
+                            200: '#FEF3C7'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0F1B3C 0%, #1E3A8A 100%);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+        }
+        .luxury-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+
+    <!-- Navigation State Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <select id="viewToggle" class="bg-navy-900 text-white px-4 py-2 rounded-lg border border-gold-500">
+            <option value="public">Public View</option>
+            <option value="admin">Admin Dashboard</option>
+        </select>
+    </div>
+
+    <!-- PUBLIC PAGES -->
+    <div id="publicView" class="view-container">
+        
+        <!-- Header Navigation -->
+        <nav class="gradient-bg text-white shadow-lg sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-gold-400 text-2xl mr-3"></i>
+                        <h1 class="text-xl font-bold font-playfair">NAPS Dinner Night</h1>
+                    </div>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="#home" class="hover:text-gold-300 transition-colors">Home</a>
+                        <a href="#tickets" class="hover:text-gold-300 transition-colors">Tickets</a>
+                        <a href="#awards" class="hover:text-gold-300 transition-colors">Awards</a>
+                        <a href="#artists" class="hover:text-gold-300 transition-colors">Artists</a>
+                        <a href="#contest" class="hover:text-gold-300 transition-colors">MR & MRS</a>
+                        <a href="#verify" class="hover:text-gold-300 transition-colors">Verify</a>
+                    </div>
+                    <button class="md:hidden text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="gradient-bg text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <!-- Elegant banquet hall interior with round tables and ambient lighting -->
+                <div class="mb-12 relative">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800" alt="Elegant banquet hall with ambient lighting" class="w-full h-96 object-cover rounded-2xl luxury-shadow opacity-80" />
+                    <div class="absolute inset-0 bg-navy-900 bg-opacity-60 rounded-2xl flex items-center justify-center">
+                        <div class="text-center">
+                            <h1 class="text-5xl md:text-7xl font-playfair font-bold mb-4">NAPS Dinner Night</h1>
+                            <p class="text-xl md:text-2xl text-gold-300 mb-2">Courtesy of Luminous Executives</p>
+                            <div class="text-gold-400 text-lg">
+                                <p class="bg-gold-500 bg-opacity-20 px-4 py-2 rounded-full inline-block mb-2">Departmental Dinner Night</p>
+                                <p class="text-sm">From the office of the D.O.S and Welfare Director</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-xl mb-8 max-w-3xl mx-auto">Join us for an unforgettable evening of celebration, recognition, and fellowship with fellow physics students and distinguished guests.</p>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#tickets" class="gold-gradient text-navy-900 px-8 py-4 rounded-full font-semibold text-lg hover-lift">
+                        <i class="fas fa-ticket-alt mr-2"></i>Get Tickets
+                    </a>
+                    <a href="#awards" class="border-2 border-gold-400 text-gold-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gold-400 hover:text-navy-900 transition-all">
+                        <i class="fas fa-trophy mr-2"></i>Vote for Awards
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tickets Section -->
+        <section id="tickets" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-playfair font-bold text-navy-900 mb-4">Event Tickets</h2>
+                    <p class="text-xl text-gray-600">Choose your perfect dining experience</p>
+                    <div class="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg inline-block">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span data-bind="availableTickets">456</span> tickets remaining
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- @COMPONENT: TicketCard [category: "Regular", price: 5000, description: "Standard dining experience"] -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 hover-lift hover:border-gold-400 transition-all">
+                        <div class="text-center">
+                            <i class="fas fa-utensils text-navy-700 text-3xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-navy-900 mb-2">Regular</h3>
+                            <div class="text-3xl font-bold text-gold-500 mb-4">₦5,000</div>
+                            <p class="text-gray-600 mb-6">Standard dining experience with full course meal and entertainment</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm text-gray-600">Quantity:</label>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">-</button>
+                                        <span class="w-8 text-center" data-bind="quantity">1</span>
+                                        <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift" data-event="click:addToCart">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: TicketCard -->
+
+                    <!-- Couples Table -->
+                    <div class="bg-white border-2 border-pink-200 rounded-2xl p-6 hover-lift hover:border-gold-400 transition-all relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-pink-500 text-white px-4 py-1 rounded-full text-sm">Popular</span>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-heart text-pink-500 text-3xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-navy-900 mb-2">Couples Table</h3>
+                            <div class="text-3xl font-bold text-gold-500 mb-4">₦8,000</div>
+                            <p class="text-gray-600 mb-6">Romantic table for two with premium seating and special couple amenities</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm text-gray-600">Quantity:</label>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">-</button>
+                                        <span class="w-8 text-center">1</span>
+                                        <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIP Table -->
+                    <div class="bg-gradient-to-br from-gold-200 to-gold-300 border-2 border-gold-400 rounded-2xl p-6 hover-lift transition-all relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-gold-500 text-navy-900 px-4 py-1 rounded-full text-sm font-bold">VIP</span>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-crown text-gold-600 text-3xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-navy-900 mb-2">VIP Table</h3>
+                            <div class="text-3xl font-bold text-navy-900 mb-2">₦50,000</div>
+                            <div class="text-sm text-navy-700 mb-4">(Six Seats)</div>
+                            <p class="text-navy-800 mb-6">Premium table with priority seating, exclusive menu, and VIP service</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm text-navy-700">Quantity:</label>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center">-</button>
+                                        <span class="w-8 text-center">1</span>
+                                        <button class="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-navy-900 text-gold-300 py-3 rounded-lg font-semibold hover:bg-navy-800 transition-colors">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sponsors -->
+                    <div class="bg-gradient-to-br from-navy-900 to-navy-800 text-white border-2 border-gold-400 rounded-2xl p-6 hover-lift transition-all relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-gold-500 text-navy-900 px-4 py-1 rounded-full text-sm font-bold">SPONSOR</span>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-handshake text-gold-400 text-3xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-2">Sponsors</h3>
+                            <div class="text-3xl font-bold text-gold-400 mb-4">₦100,000</div>
+                            <p class="text-gray-300 mb-6">Exclusive sponsorship package with premium branding and recognition</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm text-gray-300">Quantity:</label>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center">-</button>
+                                        <span class="w-8 text-center">1</span>
+                                        <button class="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Cart -->
+                <div class="mt-12 max-w-md mx-auto bg-white rounded-2xl luxury-shadow p-6">
+                    <h3 class="text-xl font-bold text-navy-900 mb-4 flex items-center">
+                        <i class="fas fa-shopping-cart mr-2"></i>Your Cart
+                    </h3>
+                    
+                    <!-- Cart Items -->
+                    <div class="space-y-3 mb-6" data-mock="true">
+                        <div class="flex justify-between items-center py-2 border-b">
+                            <span>Regular × 2</span>
+                            <span class="font-semibold">₦10,000</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b">
+                            <span>VIP Table × 1</span>
+                            <span class="font-semibold">₦50,000</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-4">
+                        <div class="flex justify-between items-center text-xl font-bold mb-6">
+                            <span>Total:</span>
+                            <span class="text-gold-500" data-bind="cartTotal">₦60,000</span>
+                        </div>
+
+                        <button class="w-full gold-gradient text-navy-900 py-4 rounded-xl font-bold text-lg hover-lift" data-event="click:proceedToCheckout">
+                            <i class="fas fa-credit-card mr-2"></i>Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Modal -->
+        <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-2xl max-w-md w-full p-6 luxury-shadow">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-navy-900">Checkout</h3>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <form class="space-y-4" data-implementation="Should integrate with Paystack Inline">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="Enter your full name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                            <input type="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="your@email.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="+234 xxx xxx xxxx" required>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 mt-6">
+                            <h4 class="font-semibold mb-2">Order Summary</h4>
+                            <div class="space-y-1 text-sm text-gray-600" data-bind="orderSummary">
+                                <div class="flex justify-between"><span>Regular × 2</span><span>₦10,000</span></div>
+                                <div class="flex justify-between"><span>VIP Table × 1</span><span>₦50,000</span></div>
+                                <div class="flex justify-between font-bold text-navy-900 text-base pt-2 border-t">
+                                    <span>Total:</span><span>₦60,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full gold-gradient text-navy-900 py-4 rounded-xl font-bold text-lg hover-lift mt-6" data-implementation="Triggers Paystack Inline payment">
+                            <i class="fas fa-lock mr-2"></i>Pay Securely with Paystack
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Awards Voting Section -->
+        <section id="awards" class="py-20 bg-gradient-to-br from-gray-50 to-gold-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-playfair font-bold text-navy-900 mb-4">Awards & Recognition</h2>
+                    <p class="text-xl text-gray-600">Vote for outstanding members of our community</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- @MAP: awardCategories.map(category => ( -->
+                    <!-- Outstanding Academic Performance Award -->
+                    <div class="bg-white rounded-2xl luxury-shadow overflow-hidden hover-lift">
+                        <!-- Portrait of a confident young person in academic attire -->
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Outstanding Academic Performance nominee" class="w-full h-48 object-cover" />
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-graduation-cap text-gold-500 text-xl mr-2"></i>
+                                <h3 class="font-bold text-lg text-navy-900">Outstanding Academic Performance</h3>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-800 mb-2" data-bind="nominee.name">John Anderson</h4>
+                            <p class="text-gray-600 text-sm mb-4" data-bind="nominee.bio">400L Physics student with exceptional research in quantum mechanics and consistent academic excellence.</p>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-poll mr-1"></i>
+                                    <span data-bind="voteCount">156</span> votes
+                                </div>
+                                <div class="text-sm text-green-600 bg-green-100 px-2 py-1 rounded">
+                                    <i class="fas fa-trending-up mr-1"></i>
+                                    Leading
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift" data-event="click:voteForNominee">
+                                    <i class="fas fa-vote-yea mr-2"></i>Vote Now
+                                </button>
+                                <button class="w-full border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors" data-implementation="Generate shareable link">
+                                    <i class="fas fa-share mr-2"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Most Innovative Project Award -->
+                    <div class="bg-white rounded-2xl luxury-shadow overflow-hidden hover-lift">
+                        <!-- Young woman working on innovative technology project -->
+                        <img src="https://pixabay.com/get/g5394b4594d455ff3cec8aa37ccada853eaeec18f2e918399bde3d730843389f49727638080201276f18874e795c52135f287542b20d4a93791d6ed2e54bebfd6_1280.jpg" alt="Most Innovative Project nominee" class="w-full h-48 object-cover" />
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-lightbulb text-gold-500 text-xl mr-2"></i>
+                                <h3 class="font-bold text-lg text-navy-900">Most Innovative Project</h3>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-800 mb-2">Sarah Chen</h4>
+                            <p class="text-gray-600 text-sm mb-4">300L Physics student who developed a revolutionary quantum computing simulation platform.</p>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-poll mr-1"></i>
+                                    <span>92</span> votes
+                                </div>
+                                <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                                    <i class="fas fa-fire mr-1"></i>
+                                    Rising
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift">
+                                    <i class="fas fa-vote-yea mr-2"></i>Vote Now
+                                </button>
+                                <button class="w-full border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-share mr-2"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Service Excellence -->
+                    <div class="bg-white rounded-2xl luxury-shadow overflow-hidden hover-lift">
+                        <!-- Young person engaged in community service activities -->
+                        <img src="https://pixabay.com/get/g379919ae643869b10c0a835901c64acb62a637bef9c7717677aa2a40bff034eb08796034116a04b9ad58cf321a2172ca5909b5fe9deba43666a757167239f5b4_1280.jpg" alt="Community Service Excellence nominee" class="w-full h-48 object-cover" />
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-hands-helping text-gold-500 text-xl mr-2"></i>
+                                <h3 class="font-bold text-lg text-navy-900">Community Service Excellence</h3>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-800 mb-2">Michael Okafor</h4>
+                            <p class="text-gray-600 text-sm mb-4">200L Physics student who organized multiple community outreach programs and science education initiatives.</p>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-poll mr-1"></i>
+                                    <span>134</span> votes
+                                </div>
+                                <div class="text-sm text-purple-600 bg-purple-100 px-2 py-1 rounded">
+                                    <i class="fas fa-heart mr-1"></i>
+                                    Popular
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift">
+                                    <i class="fas fa-vote-yea mr-2"></i>Vote Now
+                                </button>
+                                <button class="w-full border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-share mr-2"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- Voting Modal -->
+                <div id="votingModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+                    <div class="flex items-center justify-center min-h-screen p-4">
+                        <div class="bg-white rounded-2xl max-w-md w-full p-6 luxury-shadow">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold text-navy-900">Cast Your Vote</h3>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+
+                            <form class="space-y-4" data-implementation="Should enforce one vote per email per category">
+                                <div class="text-center mb-4">
+                                    <h4 class="font-semibold text-navy-800" data-bind="selectedNominee.name">John Anderson</h4>
+                                    <p class="text-sm text-gray-600" data-bind="selectedCategory">Outstanding Academic Performance</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Email *</label>
+                                    <input type="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="your@email.com" required>
+                                </div>
+
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-info-circle text-yellow-500 mt-1 mr-2"></i>
+                                        <div class="text-sm">
+                                            <p class="text-yellow-800 font-medium">Voting Rules:</p>
+                                            <ul class="text-yellow-700 mt-1 space-y-1">
+                                                <li>• One vote per email per award category</li>
+                                                <li>• Votes cannot be changed once submitted</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full gold-gradient text-navy-900 py-3 rounded-xl font-bold hover-lift">
+                                    <i class="fas fa-check mr-2"></i>Submit Vote
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artists Registration Section -->
+        <section id="artists" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-playfair font-bold text-navy-900 mb-4">Artists Registration</h2>
+                    <p class="text-xl text-gray-600">Showcase your talent at NAPS Dinner Night</p>
+                    <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg inline-block">
+                        <i class="fas fa-star mr-2"></i>
+                        Get approved by referring 5 ticket sales!
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Registration Form -->
+                    <div class="bg-white rounded-2xl luxury-shadow p-8">
+                        <h3 class="text-2xl font-bold text-navy-900 mb-6">
+                            <i class="fas fa-microphone text-gold-500 mr-2"></i>
+                            Register as an Artist
+                        </h3>
+
+                        <form class="space-y-6" data-implementation="Should generate unique referral link">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Artist Name *</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="Enter your stage name" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="your@email.com" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                <input type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="+234 xxx xxx xxxx" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Act Type *</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" required>
+                                    <option value="">Select your act type</option>
+                                    <option value="music">Music Performance</option>
+                                    <option value="dance">Dance</option>
+                                    <option value="comedy">Comedy</option>
+                                    <option value="poetry">Poetry/Spoken Word</option>
+                                    <option value="magic">Magic/Illusion</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Social Media Link</label>
+                                <input type="url" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="https://instagram.com/yourusername">
+                            </div>
+
+                            <button type="submit" class="w-full gold-gradient text-navy-900 py-4 rounded-xl font-bold text-lg hover-lift">
+                                <i class="fas fa-paper-plane mr-2"></i>Submit Registration
+                            </button>
+                        </form>
+
+                        <!-- Success State -->
+                        <div class="hidden bg-green-50 border border-green-200 rounded-lg p-6 mt-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                                <h4 class="font-bold text-green-800">Registration Submitted!</h4>
+                            </div>
+                            <p class="text-green-700 mb-4">Your referral link is ready. Share it to get 5 ticket sales for approval:</p>
+                            <div class="bg-white border border-green-200 rounded-lg p-3 mb-4">
+                                <code class="text-sm text-gray-800" data-bind="referralLink">https://naps-dinner.com/t/artist123</code>
+                                <button class="float-right text-green-600 hover:text-green-800" data-implementation="Copy to clipboard">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="text-sm text-green-600">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Referred sales: <span data-bind="referredSales">0</span>/5
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Panel -->
+                    <div class="space-y-6">
+                        <!-- Performance at a live music event -->
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" alt="Live performance at music event" class="w-full h-64 object-cover rounded-2xl luxury-shadow" />
+                        
+                        <div class="bg-gradient-to-r from-gold-50 to-gold-100 rounded-2xl p-6">
+                            <h4 class="text-xl font-bold text-navy-900 mb-4">How It Works</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-gold-500 text-white flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Register Your Act</h5>
+                                        <p class="text-gray-600 text-sm">Submit your information and get a unique referral link</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-gold-500 text-white flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Share Your Link</h5>
+                                        <p class="text-gray-600 text-sm">Promote ticket sales through your referral link</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-gold-500 text-white flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Get Approved</h5>
+                                        <p class="text-gray-600 text-sm">Once you reach 5 referred sales, you're automatically approved to perform!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-navy-900 text-white rounded-2xl p-6">
+                            <h4 class="text-xl font-bold mb-4 flex items-center">
+                                <i class="fas fa-gift text-gold-400 mr-2"></i>
+                                Artist Benefits
+                            </h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-gold-400 mr-2"></i>
+                                    Free dinner ticket on approval
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-gold-400 mr-2"></i>
+                                    Performance slot at the event
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-gold-400 mr-2"></i>
+                                    Social media promotion
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-gold-400 mr-2"></i>
+                                    Networking opportunities
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MR & MRS NAPS Contest -->
+        <section id="contest" class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-playfair font-bold text-navy-900 mb-4">MR & MRS NAPS Contest</h2>
+                    <p class="text-xl text-gray-600">Compete to represent our amazing physics community</p>
+                    <div class="mt-4 bg-pink-100 border border-pink-400 text-pink-700 px-4 py-3 rounded-lg inline-block">
+                        <i class="fas fa-crown mr-2"></i>
+                        Registration closes soon - Apply now!
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Registration Form -->
+                    <div class="bg-white rounded-2xl luxury-shadow p-8">
+                        <h3 class="text-2xl font-bold text-navy-900 mb-6">
+                            <i class="fas fa-user-friends text-pink-500 mr-2"></i>
+                            Contest Registration
+                        </h3>
+
+                        <form class="space-y-6" data-implementation="Should handle photo upload securely">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="John" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Doe" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="your@email.com" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                <input type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="+234 xxx xxx xxxx" required>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Department *</label>
+                                    <select class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" required>
+                                        <option value="">Select Department</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="applied-physics">Applied Physics</option>
+                                        <option value="theoretical-physics">Theoretical Physics</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Level *</label>
+                                    <select class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" required>
+                                        <option value="">Select Level</option>
+                                        <option value="100">100 Level</option>
+                                        <option value="200">200 Level</option>
+                                        <option value="300">300 Level</option>
+                                        <option value="400">400 Level</option>
+                                        <option value="500">500 Level</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Short Bio *</label>
+                                <textarea class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent" rows="4" placeholder="Tell us about yourself, your achievements, and why you'd make a great MR/MRS NAPS..." required></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Profile Photo *</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-pink-400 transition-colors">
+                                    <i class="fas fa-camera text-gray-400 text-3xl mb-2"></i>
+                                    <p class="text-gray-600 mb-2">Click to upload or drag and drop</p>
+                                    <p class="text-xs text-gray-500">PNG, JPG up to 5MB</p>
+                                    <input type="file" class="hidden" accept="image/*" data-implementation="Store safely with proper validation">
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <input type="checkbox" class="mt-1" required>
+                                <label class="text-sm text-gray-700">
+                                    I consent to my photo and information being used for contest promotion and agree to the terms and conditions of the MR & MRS NAPS contest. *
+                                </label>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover-lift">
+                                <i class="fas fa-paper-plane mr-2"></i>Submit Registration
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contest Information -->
+                    <div class="space-y-6">
+                        <!-- Elegant portrait of contest participants -->
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" alt="Elegant portrait of contest participants" class="w-full h-64 object-cover rounded-2xl luxury-shadow" />
+
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200">
+                            <h4 class="text-xl font-bold text-navy-900 mb-4">Contest Timeline</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Registration Open</h5>
+                                        <p class="text-gray-600 text-sm">Now - December 15th</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Shortlisting</h5>
+                                        <p class="text-gray-600 text-sm">December 16th - 20th</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                                    <div>
+                                        <h5 class="font-semibold text-navy-800">Final Contest</h5>
+                                        <p class="text-gray-600 text-sm">At the Dinner Night Event</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-gold-900 to-navy-900 text-white rounded-2xl p-6">
+                            <h4 class="text-xl font-bold mb-4 flex items-center">
+                                <i class="fas fa-trophy text-gold-400 mr-2"></i>
+                                Prizes & Benefits
+                            </h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-gold-300 mb-2">Winner</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Crown & Sash</li>
+                                        <li>• ₦50,000 Prize</li>
+                                        <li>• Photo Shoot</li>
+                                        <li>• 1-Year Title</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gold-300 mb-2">All Finalists</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Free Dinner Ticket</li>
+                                        <li>• Certificate</li>
+                                        <li>• Social Recognition</li>
+                                        <li>• Networking</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ticket Verification Section -->
+        <section id="verify" class="py-20 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-playfair font-bold text-navy-900 mb-4">Verify Your Ticket</h2>
+                <p class="text-xl text-gray-600 mb-12">Scan QR code or enter ticket details to verify authenticity</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- QR Scanner -->
+                    <div class="bg-white rounded-2xl luxury-shadow p-8">
+                        <h3 class="text-xl font-bold text-navy-900 mb-6">
+                            <i class="fas fa-qrcode text-gold-500 mr-2"></i>
+                            QR Code Scanner
+                        </h3>
+                        
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-12 mb-6" data-implementation="Should implement QR scanner using device camera">
+                            <i class="fas fa-camera text-gray-400 text-4xl mb-4"></i>
+                            <p class="text-gray-600 mb-4">Click to activate camera and scan QR code</p>
+                            <button class="bg-navy-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-navy-800 transition-colors">
+                                <i class="fas fa-camera mr-2"></i>Start Scanner
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Verification -->
+                    <div class="bg-white rounded-2xl luxury-shadow p-8">
+                        <h3 class="text-xl font-bold text-navy-900 mb-6">
+                            <i class="fas fa-keyboard text-gold-500 mr-2"></i>
+                            Manual Verification
+                        </h3>
+                        
+                        <form class="space-y-4" data-implementation="Should verify against database">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ticket Code</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="Enter ticket code (e.g., 501)" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Order ID</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold-500 focus:border-transparent" placeholder="Enter order ID" required>
+                            </div>
+
+                            <button type="submit" class="w-full gold-gradient text-navy-900 py-3 rounded-lg font-semibold hover-lift">
+                                <i class="fas fa-check-circle mr-2"></i>Verify Ticket
+                            </button>
+                        </form>
+
+                        <!-- Verification Result -->
+                        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg hidden" data-implementation="Show after verification">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                                <h4 class="font-bold text-green-800">Valid Ticket</h4>
+                            </div>
+                            <div class="text-sm text-green-700">
+                                <p><strong>Ticket:</strong> <span data-bind="ticketCode">#501</span></p>
+                                <p><strong>Category:</strong> <span data-bind="ticketCategory">Regular</span></p>
+                                <p><strong>Holder:</strong> <span data-bind="ticketHolder">John Doe</span></p>
+                                <p><strong>Status:</strong> <span class="text-green-600 font-semibold">Active</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="gradient-bg text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-gold-400 text-2xl mr-2"></i>
+                            <h3 class="text-xl font-bold font-playfair">NAPS Dinner Night</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">An exclusive evening celebrating excellence in physics education and community.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gold-400 hover:text-gold-300 transition-colors">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gold-400 hover:text-gold-300 transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gold-400 hover:text-gold-300 transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#tickets" class="text-gray-300 hover:text-gold-300 transition-colors">Buy Tickets</a></li>
+                            <li><a href="#awards" class="text-gray-300 hover:text-gold-300 transition-colors">Vote Awards</a></li>
+                            <li><a href="#artists" class="text-gray-300 hover:text-gold-300 transition-colors">Artist Registration</a></li>
+                            <li><a href="#contest" class="text-gray-300 hover:text-gold-300 transition-colors">MR & MRS Contest</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold mb-4">Support</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#verify" class="text-gray-300 hover:text-gold-300 transition-colors">Verify Ticket</a></li>
+                            <li><a href="mailto:support@naps-dinner.com" class="text-gray-300 hover:text-gold-300 transition-colors">Contact Support</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-gold-300 transition-colors">FAQs</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-gold-300 transition-colors">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold mb-4">Event Details</h4>
+                        <div class="space-y-2 text-gray-300">
+                            <p class="flex items-center">
+                                <i class="fas fa-calendar mr-2 text-gold-400"></i>
+                                December 22, 2024
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-clock mr-2 text-gold-400"></i>
+                                6:00 PM - 11:00 PM
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2 text-gold-400"></i>
+                                Grand Ballroom, Lagos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-navy-700 mt-12 pt-8 text-center">
+                    <p class="text-gray-300">
+                        © 2024 NAPS Dinner Night. All rights reserved. | Powered by Luminous Executives
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminView" class="view-container hidden">
+        <div class="flex h-screen bg-gray-100">
+            <!-- Sidebar -->
+            <div class="w-64 gradient-bg text-white flex-shrink-0">
+                <div class="p-6">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-shield-alt text-gold-400 text-2xl mr-2"></i>
+                        <h1 class="text-xl font-bold">Admin Dashboard</h1>
+                    </div>
+                    
+                    <nav class="space-y-2">
+                        <a href="#overview" class="flex items-center space-x-3 p-3 rounded-lg bg-navy-800 bg-opacity-50 hover:bg-opacity-75 transition-colors">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Overview</span>
+                        </a>
+                        <a href="#tickets-admin" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-ticket-alt"></i>
+                            <span>Tickets & Orders</span>
+                        </a>
+                        <a href="#inventory" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-warehouse"></i>
+                            <span>Inventory</span>
+                        </a>
+                        <a href="#awards-admin" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-trophy"></i>
+                            <span>Awards & Voting</span>
+                        </a>
+                        <a href="#artists-admin" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-microphone"></i>
+                            <span>Artists</span>
+                        </a>
+                        <a href="#contest-admin" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-users"></i>
+                            <span>MR & MRS Contest</span>
+                        </a>
+                        <a href="#settings" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#logs" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-navy-800 hover:bg-opacity-50 transition-colors">
+                            <i class="fas fa-list-alt"></i>
+                            <span>Logs</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="absolute bottom-6 left-6 right-6">
+                    <div class="bg-navy-800 bg-opacity-50 rounded-lg p-4">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-user-circle text-gold-400 mr-2"></i>
+                            <span class="font-medium">Admin User</span>
+                        </div>
+                        <button class="text-sm text-gray-300 hover:text-white transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 overflow-auto">
+                <!-- Header -->
+                <header class="bg-white shadow-sm border-b border-gray-200 p-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-navy-900">Dashboard Overview</h2>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-clock"></i>
+                                <span>Last updated: <span data-bind="lastUpdated">2 minutes ago</span></span>
+                            </div>
+                            <button class="bg-gold-500 text-navy-900 px-4 py-2 rounded-lg font-semibold hover-lift">
+                                <i class="fas fa-download mr-2"></i>Export Data
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Dashboard Content -->
+                <div class="p-6">
+                    <!-- KPI Cards -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        
+                        <!-- @COMPONENT: KPICard [title: "Total Revenue", value: "₦2,450,000", change: "+12%", icon: "money-bill-wave"] -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Total Revenue</p>
+                                    <p class="text-2xl font-bold text-navy-900" data-bind="totalRevenue">₦2,450,000</p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-money-bill-wave text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-arrow-up text-green-600 mr-1"></i>
+                                <span class="text-green-600">+12%</span>
+                                <span class="text-gray-500 ml-2">from last week</span>
+                            </div>
+                        </div>
+                        <!-- @END_COMPONENT: KPICard -->
+
+                        <!-- Total Orders -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Total Orders</p>
+                                    <p class="text-2xl font-bold text-navy-900">347</p>
+                                </div>
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-arrow-up text-green-600 mr-1"></i>
+                                <span class="text-green-600">+8%</span>
+                                <span class="text-gray-500 ml-2">from last week</span>
+                            </div>
+                        </div>
+
+                        <!-- Tickets Remaining -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Tickets Remaining</p>
+                                    <p class="text-2xl font-bold text-navy-900">153</p>
+                                </div>
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-ticket-alt text-yellow-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="text-gray-500">Out of 500 total</span>
+                            </div>
+                        </div>
+
+                        <!-- Total Votes -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Total Votes</p>
+                                    <p class="text-2xl font-bold text-navy-900">1,234</p>
+                                </div>
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-vote-yea text-purple-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-arrow-up text-green-600 mr-1"></i>
+                                <span class="text-green-600">+23%</span>
+                                <span class="text-gray-500 ml-2">from yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                        <!-- Sales by Category -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <h3 class="text-lg font-bold text-navy-900 mb-4">Sales by Category</h3>
+                            <div class="space-y-4" data-implementation="Should use charting library like Chart.js">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-blue-500 rounded mr-3"></div>
+                                        <span>Regular</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">234 tickets</div>
+                                        <div class="text-sm text-gray-500">₦1,170,000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-pink-500 rounded mr-3"></div>
+                                        <span>Couples Table</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">89 tickets</div>
+                                        <div class="text-sm text-gray-500">₦712,000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-gold-500 rounded mr-3"></div>
+                                        <span>VIP Table</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">18 tickets</div>
+                                        <div class="text-sm text-gray-500">₦900,000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-navy-900 rounded mr-3"></div>
+                                        <span>Sponsors</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">6 tickets</div>
+                                        <div class="text-sm text-gray-500">₦600,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-xl luxury-shadow p-6">
+                            <h3 class="text-lg font-bold text-navy-900 mb-4">Recent Activity</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-green-800">Payment Verified</p>
+                                        <p class="text-sm text-green-600">Order #ORD-2024-001 - ₦50,000</p>
+                                        <p class="text-xs text-green-500">2 minutes ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                    <i class="fas fa-user-plus text-blue-500 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-blue-800">New Artist Registration</p>
+                                        <p class="text-sm text-blue-600">Sarah Johnson - Music Performance</p>
+                                        <p class="text-xs text-blue-500">15 minutes ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
+                                    <i class="fas fa-vote-yea text-purple-500 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-purple-800">New Vote Cast</p>
+                                        <p class="text-sm text-purple-600">Outstanding Academic Performance</p>
+                                        <p class="text-xs text-purple-500">32 minutes ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Tables Section -->
+                    <div class="grid gap-6">
+                        
+                        <!-- Recent Orders -->
+                        <div class="bg-white rounded-xl luxury-shadow overflow-hidden">
+                            <div class="p-6 border-b border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-bold text-navy-900">Recent Orders</h3>
+                                    <div class="flex space-x-2">
+                                        <input type="text" placeholder="Search orders..." class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent">
+                                        <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent">
+                                            <option>All Categories</option>
+                                            <option>Regular</option>
+                                            <option>Couples</option>
+                                            <option>VIP</option>
+                                            <option>Sponsors</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        
+                                        <!-- @MAP: orders.map(order => ( -->
+                                        <tr data-mock="true">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <span class="font-mono">#ORD-2024-001</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">John Doe</div>
+                                                    <div class="text-sm text-gray-500">john@email.com</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                    VIP Table
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₦50,000</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Confirmed
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-gold-600 hover:text-gold-800" data-implementation="Should view order details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-blue-600 hover:text-blue-800" data-implementation="Should resend ticket email">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800" data-implementation="Should refund/cancel order">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <span class="font-mono">#ORD-2024-002</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                                    <div class="text-sm text-gray-500">sarah@email.com</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-pink-100 text-pink-800">
+                                                    Couples Table
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₦16,000</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Confirmed
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-gold-600 hover:text-gold-800">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-blue-600 hover:text-blue-800">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <span class="font-mono">#ORD-2024-003</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Michael Chen</div>
+                                                    <div class="text-sm text-gray-500">michael@email.com</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                    Regular
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">4</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₦20,000</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    Pending
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-gold-600 hover:text-gold-800">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-blue-600 hover:text-blue-800">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- @END_MAP )) -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="px-6 py-3 bg-gray-50 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-700">
+                                        Showing 1 to 10 of 347 results
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <button class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">Previous</button>
+                                        <button class="px-3 py-2 text-sm bg-gold-500 text-navy-900 border border-gold-500 rounded-lg">1</button>
+                                        <button class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">2</button>
+                                        <button class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">3</button>
+                                        <button class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Artists Status -->
+                        <div class="bg-white rounded-xl luxury-shadow overflow-hidden">
+                            <div class="p-6 border-b border-gray-200">
+                                <h3 class="text-lg font-bold text-navy-900">Artist Applications</h3>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Artist</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Act Type</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referrals</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr data-mock="true">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">David Williams</div>
+                                                    <div class="text-sm text-gray-500">david@email.com</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Music Performance</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <div class="flex items-center">
+                                                    <span class="font-semibold text-green-600">7</span>
+                                                    <span class="text-gray-400 ml-1">/5</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Approved
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-gold-600 hover:text-gold-800">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-blue-600 hover:text-blue-800">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Lisa Anderson</div>
+                                                    <div class="text-sm text-gray-500">lisa@email.com</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Dance</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <div class="flex items-center">
+                                                    <span class="font-semibold text-yellow-600">3</span>
+                                                    <span class="text-gray-400 ml-1">/5</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    Pending
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-gold-600 hover:text-gold-800">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-green-600 hover:text-green-800" data-implementation="Manual approve">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800" data-implementation="Reject application">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View Toggle Functionality
+        (function() {
+            const viewToggle = document.getElementById('viewToggle');
+            const publicView = document.getElementById('publicView');
+            const adminView = document.getElementById('adminView');
+
+            viewToggle.addEventListener('change', function() {
+                if (this.value === 'admin') {
+                    publicView.classList.add('hidden');
+                    adminView.classList.remove('hidden');
+                } else {
+                    publicView.classList.remove('hidden');
+                    adminView.classList.add('hidden');
+                }
+            });
+        })();
+
+        // Smooth scroll for navigation links
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // TODO: Implement Paystack payment integration
+        // TODO: Implement QR code generation and scanning
+        // TODO: Implement PDF ticket generation
+        // TODO: Implement email sending functionality
+        // TODO: Implement database operations for tickets, votes, artists, contest entries
+        // TODO: Implement admin authentication and JWT sessions
+        // TODO: Implement file upload for contest photos
+        // TODO: Implement real-time updates for inventory and statistics
+        // TODO: Implement CSV export functionality
+        // TODO: Implement webhook verification for Paystack
+        // TODO: Implement rate limiting and bot protection
+    </script>
+
+</body>
+</html>

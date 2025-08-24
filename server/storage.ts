@@ -262,13 +262,22 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getLogs(type?: string, limit = 100): Promise<SystemLog[]> {
-    let query = db.select().from(systemLogs);
-    
+    let logsQuery;
     if (type) {
-      query = query.where(eq(systemLogs.type, type));
+      logsQuery = db
+        .select()
+        .from(systemLogs)
+        .where(eq(systemLogs.type, type))
+        .orderBy(desc(systemLogs.createdAt))
+        .limit(limit);
+    } else {
+      logsQuery = db
+        .select()
+        .from(systemLogs)
+        .orderBy(desc(systemLogs.createdAt))
+        .limit(limit);
     }
-    
-    return await query.orderBy(desc(systemLogs.createdAt)).limit(limit);
+    return await logsQuery;
   }
 
   async getTotalRevenue(): Promise<number> {
